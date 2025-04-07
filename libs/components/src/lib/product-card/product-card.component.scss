@@ -1,0 +1,13 @@
+@keyframes scrollingText {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.scrolling-badge {
+  white-space: nowrap;
+  animation: scrollingText 3s linear infinite;
+}

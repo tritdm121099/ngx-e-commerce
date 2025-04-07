@@ -6,12 +6,17 @@ const config: StorybookConfig = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     '@storybook/addon-themes',
-   
   ],
   framework: {
     name: '@storybook/angular',
     options: {},
   },
+  staticDirs: [
+    {
+      from: './public',
+      to: 'assets',
+    },
+  ],
 };
 
 export default config;

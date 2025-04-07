@@ -13,11 +13,3 @@ type Story = StoryObj<ComponentsComponent>;
 export const Primary: Story = {
   args: {},
 };
-
-export const Heading: Story = {
-  args: {},
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    expect(canvas.getByText(/components works!/gi)).toBeTruthy();
-  },
-};

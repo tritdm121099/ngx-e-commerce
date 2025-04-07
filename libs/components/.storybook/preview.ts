@@ -4,7 +4,7 @@ import {
 } from '@storybook/addon-themes';
 import { Preview } from '@storybook/angular';
 
-export const decorators = [
+const decorators = [
   withThemeByDataAttribute({
     themes: {
       light: 'light',
@@ -22,8 +22,12 @@ export const decorators = [
   }),
 ];
 
-export const preview: Preview = {
+const preview: Preview = {
   parameters: {
     backgrounds: { disable: true },
   },
+  decorators,
 };
+
+
+export default preview;

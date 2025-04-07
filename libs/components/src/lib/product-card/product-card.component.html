@@ -1,0 +1,58 @@
+<div
+  class="relative w-72 rounded-2xl overflow-hidden shadow-lg border transition-colors duration-300
+    bg-white border-gray-200 text-gray-900
+    dark:bg-gray-900 dark:border-gray-700 dark:text-white"
+>
+  <div
+    *ngIf="product.discountPercentage"
+    class="absolute top-2 right-2 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10"
+  >
+    -{{ product.discountPercentage }}%
+  </div>
+
+  <img
+    [src]="product.imageUrl"
+    [alt]="product.title"
+    class="w-full h-80 object-cover"
+  />
+
+  <div class="p-4 space-y-2">
+    <h2 class="text-lg font-semibold">
+      {{ product.title }}
+    </h2>
+
+    <div class="flex items-center gap-2">
+      <span
+        *ngIf="product.originalPrice"
+        class="text-sm line-through text-gray-400 dark:text-gray-500"
+      >
+        {{ product.originalPrice | currency }}
+      </span>
+      <span class="text-lg font-bold text-red-600 dark:text-red-400">
+        {{ product.discountedPrice | currency }}
+      </span>
+    </div>
+  </div>
+
+  <div class="bg-black text-white text-xs py-2 overflow-hidden dark:bg-gray-800">
+    <div
+      #scrollingContent
+      class="flex gap-4 w-max px-4"
+      style="will-change: transform;"
+    >
+      <ng-container *ngFor="let badge of badges">
+        <div class="flex items-center gap-1 flex-shrink-0 whitespace-nowrap">
+          <span>⚡</span>
+          <span class="font-semibold">{{ badge }}</span>
+        </div>
+      </ng-container>
+
+      <ng-container *ngFor="let badge of badges">
+        <div class="flex items-center gap-1 flex-shrink-0 whitespace-nowrap">
+          <span>⚡</span>
+          <span class="font-semibold">{{ badge }}</span>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
