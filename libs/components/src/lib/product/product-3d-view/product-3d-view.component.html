@@ -1,0 +1,22 @@
+@if (modelUrl) {
+  <div class="viewer-container">
+    <model-viewer
+      [src]="modelUrl"
+      [alt]="altText"
+      [attr.auto-rotate]="autoRotate ? '' : null"
+      [attr.camera-controls]="cameraControls ? '' : null"
+      [attr.ar]="enableAR ? '' : null"
+      [attr.environment-image]="environmentImage"
+      [attr.skybox-image]="skyboxImage"
+      [shadow-intensity]="shadowIntensity"
+      [exposure]="exposure"
+      loading="eager"
+      reveal="auto"
+    >
+    </model-viewer>
+  </div>
+} @else {
+  <h3 class="text-white dark:text-">
+    No 3D Model Url
+  </h3>
+}
