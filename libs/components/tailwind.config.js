@@ -8,6 +8,9 @@ module.exports = {
     ...createGlobPatternsForDependencies(__dirname),
   ],
   darkMode: ['class', '[data-mode="dark"]'],
+  safelist: [ 
+    'dark',
+  ],
   theme: {
     extend: {},
   },

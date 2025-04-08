@@ -8,7 +8,7 @@ const decorators = [
   withThemeByDataAttribute({
     themes: {
       light: 'light',
-      dark: 'dark dark:bg-gray-900',
+      dark: 'dark',
     },
     defaultTheme: 'light',
     attributeName: 'data-mode',
