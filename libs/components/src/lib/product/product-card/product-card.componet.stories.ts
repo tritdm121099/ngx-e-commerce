@@ -8,7 +8,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 
 const meta: Meta<ProductCardComponent> = {
   component: ProductCardComponent,
-  title: 'ProductCardComponent',
+  title: 'Product / Product Card',
   decorators: [
     applicationConfig({
       providers: [provideAnimations()],
@@ -22,7 +22,7 @@ export const Primary: Story = {
   args: {
     product: {
       id: '1',
-      title: 'Ribbed Tank Top',
+      title: 'Mew',
       imageUrl: '/assets/image_1.png',
       originalPrice: 26,
       discountedPrice: 18,

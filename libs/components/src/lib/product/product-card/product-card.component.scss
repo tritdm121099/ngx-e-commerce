@@ -1,0 +1,30 @@
+:host {
+  display: block;
+}
+
+.scroll-parent {
+  width: fit-content;
+  overflow: hidden;
+  user-select: none;
+}
+
+.scroll-element {
+  width: inherit;
+  height: inherit;
+  left: 0%;
+  top: 0%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  animation: scroll 10s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% - 0.25rem));
+  }
+}
+

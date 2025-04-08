@@ -1,0 +1,77 @@
+<div
+  class="relative w-72 rounded-2xl overflow-hidden shadow-lg border transition-colors duration-300 bg-white border-gray-200 text-gray-900 dark:bg-gray-900 dark:border-gray-700 dark:text-white"
+>
+  <div class="relative">
+    <div
+      *ngIf="product.discountPercentage"
+      class="absolute top-2 right-2 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full z-10"
+    >
+      -{{ product.discountPercentage }}%
+    </div>
+  
+    <img
+      [src]="product.imageUrl"
+      [alt]="product.title"
+      class="w-full h-80 object-cover"
+    />
+
+    @if (badges && badges.length) {
+      <div class="absolute bottom-0 left-0 right-0">
+        <ng-container
+          [ngTemplateOutlet]="saleBadges"
+          [ngTemplateOutletContext]="{badges}"
+        ></ng-container>
+      </div>
+    }
+  </div>
+
+  <div class="p-4 space-y-2">
+    <h2 class="text-lg font-semibold">
+      {{ product.title }}
+    </h2>
+
+    <div class="flex items-center gap-2">
+      <span
+        *ngIf="product.originalPrice"
+        class="text-sm line-through text-gray-400 dark:text-gray-500"
+      >
+        {{ product.originalPrice | currency }}
+      </span>
+      <span class="text-lg font-bold text-red-600 dark:text-red-400">
+        {{ product.discountedPrice | currency }}
+      </span>
+    </div>
+  </div>
+</div>
+
+<ng-template #saleBadges let-badges="badges">
+  <div
+    class="bg-black/25 text-white text-xs py-2 overflow-hidden dark:bg-gray-800/25"
+  >
+    <div class="scroll-parent flex gap-4 w-max h-4">
+      <div class="scroll-element primary flex flex-nowrap gap-1">
+        @for (badge of badges; track badge.id) {
+        <ng-container
+          [ngTemplateOutlet]="saleBadgeItem"
+          [ngTemplateOutletContext]="{ badge }"
+        ></ng-container>
+        }
+      </div>
+      <div class="scroll-element secondary flex flex-nowrap gap-1">
+        @for (badge of badges; track badge.id) {
+        <ng-container
+          [ngTemplateOutlet]="saleBadgeItem"
+          [ngTemplateOutletContext]="{ badge }"
+        ></ng-container>
+        }
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #saleBadgeItem let-badge="badge">
+  <div class="flex items-center gap-1 whitespace-nowrap">
+    <span>⚡</span>
+    <span class="font-semibold">{{ badge }}</span>
+  </div>
+</ng-template>
