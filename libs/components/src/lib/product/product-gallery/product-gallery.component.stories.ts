@@ -1,7 +1,6 @@
 import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   applicationConfig,
-  argsToTemplate,
   type Meta,
   type StoryObj,
 } from '@storybook/angular';
@@ -25,67 +24,53 @@ export const Primary: Story = {
       {
         id: 1,
         type: 'image',
-        src: 'https://primefaces.org/cdn/primeng/images/galleria/galleria1.jpg',
+        src: '/assets/image_8.jpg',
         alt: 'Mountains and Lake',
-        thumbnailSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria1.jpg',
+        thumbnailSrc: '/assets/image_8.jpg',
       },
       {
         id: 2,
         type: 'image',
-        src: 'https://primefaces.org/cdn/primeng/images/galleria/galleria2s.jpg',
+        src: '/assets/image_2.jpg',
         alt: 'Valley',
-        thumbnailSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria2s.jpg',
+        thumbnailSrc: '/assets/image_2.jpg',
       },
       {
         id: 3,
         type: 'image',
-        src: 'https://primefaces.org/cdn/primeng/images/galleria/galleria3s.jpg',
+        src: '/assets/image_3.jpg',
         alt: 'Pug Dog',
-        thumbnailSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria3s.jpg',
+        thumbnailSrc: '/assets/image_3.jpg',
       },
       {
         id: 4,
         type: 'image',
-        src: 'https://primefaces.org/cdn/primeng/images/galleria/galleria4s.jpg',
+        src: '/assets/image_4.jpg',
         alt: 'Bird',
-        thumbnailSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria4s.jpg',
+        thumbnailSrc: '/assets/image_4.jpg',
       },
       {
         id: 5,
         type: 'image',
-        src: 'https://primefaces.org/cdn/primeng/images/galleria/galleria5s.jpg',
+        src: '/assets/image_5.jpg',
         alt: 'Mountain Road',
-        thumbnailSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria5s.jpg',
+        thumbnailSrc: '/assets/image_5.jpg',
       },
       {
         id: 6,
         type: 'image',
-        src: 'https://primefaces.org/cdn/primeng/images/galleria/galleria6s.jpg',
+        src: '/assets/image_6.jpg',
         alt: 'Waves',
-        thumbnailSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria6s.jpg',
+        thumbnailSrc: '/assets/image_6.jpg',
       },
       {
         id: 7,
         type: 'image',
-        src: 'https://primefaces.org/cdn/primeng/images/galleria/galleria7s.jpg',
+        src: '/assets/image_7.jpg',
         alt: 'Books',
-        thumbnailSrc:
-          'https://primefaces.org/cdn/primeng/images/galleria/galleria7s.jpg',
+        thumbnailSrc: '/assets/image_7.jpg',
       },
     ],
-  },
-  render: (args) => ({
-    template: `
-      <ngx-e-com-product-gallerry ${argsToTemplate(
-        args
-      )}></ngx-e-com-product-gallerry>
-    `,
-    props: args,
-  }),
+    isLoop: true,
+  } as unknown as Story['args'],
 };

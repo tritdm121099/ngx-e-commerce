@@ -5,12 +5,13 @@ import {
   computed,
   Input,
   Signal,
-  signal
+  signal,
+  WritableSignal,
 } from '@angular/core';
 import { GalleryItem } from './gallery-item.i';
 
 @Component({
-  selector: 'ngx-e-com-product-gallerry',
+  selector: 'ngx-e-com-product-gallery',
   standalone: true,
   imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -135,14 +136,17 @@ import { GalleryItem } from './gallery-item.i';
   styles: [``],
 })
 export class ProductGalleryComponent {
-  @Input({ required: true, alias: 'items' }) setItems(items: GalleryItem[]) {
-    console.log('aaaaa', items);
-    this.items.set(items);
+  @Input({ required: true })
+  set items(items: GalleryItem[]) {
+    this._items.set(items);
     this.selectedIndex.set(0);
+  }
+  get items(): WritableSignal<GalleryItem[]> {
+    return this._items;
   }
   @Input() isLoop = true;
 
-  items = signal<GalleryItem[]>([]);
+  _items = signal<GalleryItem[]>([]);
   validItems = computed(() => this.items() && this.items().length > 0);
   selectedIndex = signal(0);
   selectedItem: Signal<GalleryItem | undefined> = computed(() => {
@@ -154,21 +158,21 @@ export class ProductGalleryComponent {
   });
   canGoPrevious: Signal<boolean> = computed(() => {
     return (
-      this.items &&
-      this.items.length > 1 &&
+      this.items() &&
+      this.items().length > 1 &&
       (this.isLoop ? true : this.selectedIndex() !== 0)
     );
   });
   canGoNext: Signal<boolean> = computed(() => {
     return (
-      this.items &&
-      this.items.length > 1 &&
+      this.items() &&
+      this.items().length > 1 &&
       (this.isLoop ? true : this.items().length - 1 > this.selectedIndex())
     );
   });
 
   selectItem(index: number): void {
-    if (index >= 0 && index < this.items.length) {
+    if (index >= 0 && index < this.items().length) {
       this.selectedIndex.set(index);
     }
   }
