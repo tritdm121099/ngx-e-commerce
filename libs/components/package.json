@@ -1,7 +1,13 @@
 {
   "name": "ngx-e-com",
   "version": "0.0.1",
-  "peerDependencies": {
+  "peerDependencies": {  
+    "@angular/common": "~19.2.0",
+    "@angular/core": "~19.2.0",
+    "@google/model-viewer": "^4.0.0",
+    "rxjs": "~7.8.0",
+    "@nx/angular": "20.7.1",
+    "angular-svg-icon": "^19.1.1"
   },
   "sideEffects": false
 }
