@@ -1,0 +1,159 @@
+@if (validItems()) {
+<div
+  class="w-full max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden"
+>
+  <div class="relative aspect-video bg-gray-200 dark:bg-gray-700">
+    @if (selectedItem()!; as selected) { @switch (selected.type) { @case
+    ('image') {
+    <img
+      [src]="selected.src"
+      [alt]="selected.alt || 'Gallery image'"
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    } @case ('video') {
+    <video
+      #mainVideoElement
+      [src]="selected.src"
+      [controls]="getVideoControls(selected)"
+      [autoplay]="selected.videoAutoplay || false"
+      [muted]="
+        selected.videoMuted === undefined
+          ? selected.videoAutoplay
+          : selected.videoMuted
+      "
+      [loop]="selected.videoLoop || false"
+      [preload]="getVideoPreload(selected)"
+      class="absolute inset-0 w-full h-full"
+    ></video>
+    } @case ('3d') {
+    <div
+      class="absolute inset-0 flex items-center justify-center text-gray-500 dark:text-gray-400"
+    >
+      <span class="text-xl">3D Model View (Not Implemented)</span>
+    </div>
+    } @default {
+    <div
+      class="absolute inset-0 flex items-center justify-center text-gray-500 dark:text-gray-400"
+    >
+      <span class="text-xl">Unsupported format: {{ selected.type }}</span>
+    </div>
+    } } }
+
+    <div
+      *ngIf="!selectedItem"
+      class="absolute inset-0 flex items-center justify-center text-gray-500 dark:text-gray-400"
+    >
+      Loading or unsupported format...
+    </div>
+  </div>
+
+  <div class="p-2 sm:p-3 bg-gray-50 dark:bg-gray-900">
+    <div class="flex items-center justify-between space-x-2">
+      <button
+        type="button"
+        (click)="previousItem()"
+        [disabled]="!canGoPrevious()"
+        class="p-2 rounded-full text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        aria-label="Previous image"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 sm:h-6 sm:w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15 19l-7-7 7-7"
+          />
+        </svg>
+      </button>
+
+      <div #thumbnailContainer class="overflow-hidden mx-1">
+        <div
+          class="flex transition-transform duration-300 ease-in-out"
+          #thumbnailStrip
+        >
+          @for (item of items(); track item.id; let idx = $index ) {
+          <button
+            #thumbnailButton
+            type="button"
+            (click)="selectItem(idx)"
+            class="flex-shrink-0 w-16 h-12 sm:w-20 sm:h-16 rounded-md overflow-hidden focus:outline-none transition-all duration-150 ease-in-out mx-1 bg-gray-200 dark:bg-gray-700 relative"
+            [ngClass]="{
+              'ring-2 ring-offset-2 ring-indigo-500 dark:ring-offset-gray-900':
+                idx === selectedIndex(),
+              'opacity-70 hover:opacity-100': idx !== selectedIndex()
+            }"
+            [attr.aria-current]="idx === selectedIndex() ? 'true' : 'false'"
+            [attr.aria-label]="'View image ' + (idx + 1)"
+          >
+            @if(getThumbnailSource(item); as thumbSrc) { @switch (item.type) {
+            @case ('image') {
+            <img
+              *ngIf="item.type === 'image'"
+              [src]="thumbSrc"
+              [alt]="item.alt || 'Thumbnail ' + (idx + 1)"
+              class="w-full h-full object-cover absolute inset-0"
+              loading="lazy"
+            />
+            } @case ('video') {
+            <img
+              [src]="thumbSrc"
+              [alt]="item.alt || 'Video thumbnail ' + (idx + 1)"
+              class="w-full h-full object-cover absolute inset-0"
+              loading="lazy"
+            />
+            <svg-icon
+              src="/assets/ngx-e-com/icons/play_outline.svg"
+              [class]="'w-3 absolute top-1 right-1'"
+            ></svg-icon>
+            } } } @else {
+            <div
+              class="w-full h-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center text-xs text-gray-500 dark:text-gray-400 relative"
+            >
+              Not have image thumbnail
+              <svg-icon
+                src="/assets/ngx-e-com/icons/play_outline.svg"
+                [class]="'w-3 absolute top-1 right-1'"
+              ></svg-icon>
+            </div>
+            }
+          </button>
+          }
+        </div>
+      </div>
+
+      <button
+        type="button"
+        (click)="nextItem()"
+        [disabled]="!canGoNext()"
+        class="p-2 rounded-full text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        aria-label="Next image"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 sm:h-6 sm:w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9 5l7 7-7 7"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+} @else {
+<div class="text-center text-gray-500 dark:text-gray-400 py-10">
+  No items to display in the gallery.
+</div>
+}

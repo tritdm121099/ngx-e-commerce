@@ -5,13 +5,16 @@ import {
   type StoryObj,
 } from '@storybook/angular';
 import { ProductGalleryComponent } from './product-gallery.component';
+import { GalleryItem } from './gallery-item.i';
+import { provideHttpClient } from '@angular/common/http';
+import { provideNgxECom } from '../../libs.provide';
 
 const meta: Meta<ProductGalleryComponent> = {
   component: ProductGalleryComponent,
-  title: 'Product / Gallery',
+  title: 'Molecules / Product / Gallery',
   decorators: [
     applicationConfig({
-      providers: [provideAnimations()],
+      providers: [provideAnimations(), provideHttpClient(), provideNgxECom()],
     }),
   ],
 };
@@ -43,6 +46,14 @@ export const Primary: Story = {
         thumbnailSrc: '/assets/image_3.jpg',
       },
       {
+        id: 10,
+        type: 'video',
+        videoLoop: true,
+        videoMuted: false,
+        videoAutoplay: true,
+        src: 'https://www.w3schools.com/tags/mov_bbb.mp4',
+      },
+      {
         id: 4,
         type: 'image',
         src: '/assets/image_4.jpg',
@@ -70,7 +81,7 @@ export const Primary: Story = {
         alt: 'Books',
         thumbnailSrc: '/assets/image_7.jpg',
       },
-    ],
+    ] as GalleryItem[],
     isLoop: true,
   } as unknown as Story['args'],
 };

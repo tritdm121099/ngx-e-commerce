@@ -4,4 +4,11 @@ export interface GalleryItem {
   src: string;
   alt?: string;
   thumbnailSrc?: string;
+
+  // video
+  videoAutoplay?: boolean;
+  videoMuted?: boolean;
+  videoLoop?: boolean;
+  videoControls?: boolean;
+  videoPreload?: 'auto' | 'metadata' | 'none';
 }
