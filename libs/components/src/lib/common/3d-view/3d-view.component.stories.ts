@@ -4,11 +4,11 @@ import {
   type Meta,
   type StoryObj,
 } from '@storybook/angular';
-import { Product3dViewComponent } from './product-3d-view.component';
+import { ThreeDViewComponent } from './3d-view.component';
 
-const meta: Meta<Product3dViewComponent> = {
-  component: Product3dViewComponent,
-  title: 'Product / 3D View',
+const meta: Meta<ThreeDViewComponent> = {
+  component: ThreeDViewComponent,
+  title: 'Atoms / 3D View',
   decorators: [
     applicationConfig({
       providers: [provideAnimations()],
@@ -16,7 +16,7 @@ const meta: Meta<Product3dViewComponent> = {
   ],
 };
 export default meta;
-type Story = StoryObj<Product3dViewComponent>;
+type Story = StoryObj<ThreeDViewComponent>;
 
 export const NeilArmstrong: Story = {
   args: {

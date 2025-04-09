@@ -8,7 +8,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 
 const meta: Meta<ProductCardComponent> = {
   component: ProductCardComponent,
-  title: 'Product / Product Card',
+  title: 'Molecules / Product / Product Card',
   decorators: [
     applicationConfig({
       providers: [provideAnimations()],

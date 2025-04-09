@@ -13,10 +13,10 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  templateUrl: './product-3d-view.component.html',
-  styleUrls: ['./product-3d-view.component.scss'],
+  templateUrl: './3d-view.component.html',
+  styleUrls: ['./3d-view.component.scss'],
 })
-export class Product3dViewComponent implements OnInit {
+export class ThreeDViewComponent implements OnInit {
   @Input({required: true}) modelUrl!: string;
   @Input() altText = '3D model';
   @Input() autoRotate = false;
