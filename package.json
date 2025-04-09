@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "storybook": "nx run components:storybook",
-    "storybook:build": "nx run components:build-storybook"
+    "storybook:build": "export NX_SKIP_NX_CACHE=true & nx run components:build-storybook"
   },
   "private": true,
   "dependencies": {
