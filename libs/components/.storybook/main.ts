@@ -17,6 +17,10 @@ const config: StorybookConfig = {
       from: './public',
       to: 'assets',
     },
+    {
+      from: '../src/public',
+      to: 'assets/ngx-e-com'
+    }
   ],
 };
 
