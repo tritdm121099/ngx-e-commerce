@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "storybook": "nx run components:storybook",
-    "storybook:build": "export NX_SKIP_NX_CACHE=true & nx run components:build-storybook"
+    "storybook:build": "export NX_SKIP_NX_CACHE=true & nx run components:build-storybook",
+    "storybook:deploy": "export GH_PAGES=true & nx run components:build-storybook"
   },
   "private": true,
   "dependencies": {
@@ -67,6 +68,7 @@
     "postcss-url": "~10.1.3",
     "prettier": "^2.6.2",
     "storybook": "^8.4.6",
+    "string-replace-loader": "^3.1.0",
     "tailwindcss": "^3.0.2",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",

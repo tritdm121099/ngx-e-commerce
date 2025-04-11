@@ -1,4 +1,4 @@
-import type { StorybookConfig } from '@storybook/angular';
+import type { Loader, StorybookConfig } from '@storybook/angular';
 
 const config: StorybookConfig = {
   stories: ['../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],
@@ -19,9 +19,24 @@ const config: StorybookConfig = {
     },
     {
       from: '../src/public',
-      to: 'assets/ngx-e-com'
-    }
+      to: 'assets/ngx-e-com',
+    },
   ],
+  webpackFinal: async (config) => {
+    if (process.env['GH_PAGES']) {
+      if (config && config.module && config.module.rules) {
+        config.module.rules.push({
+          test: /.component.*.ts/,
+          loader: 'string-replace-loader',
+          options: {
+            search: '/assets/',
+            replace: '/notion-publish-tool/assets/',
+          },
+        });
+      }
+    }
+    return config;
+  },
 };
 
 export default config;
