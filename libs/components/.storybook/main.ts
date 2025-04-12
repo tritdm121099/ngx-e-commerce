@@ -1,5 +1,8 @@
 import type { Loader, StorybookConfig } from '@storybook/angular';
 
+const repoName = process.env['GH_PAGES_REPO_NAME'] || 'ngx-e-commerce';
+const publicPath = process.env['GH_PAGES'] ? `/${repoName}/` : '/';
+
 const config: StorybookConfig = {
   stories: ['../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],
   addons: [
@@ -14,27 +17,38 @@ const config: StorybookConfig = {
   },
   staticDirs: [
     {
-      from: './public',
-      to: 'assets',
-    },
-    {
       from: '../src/public',
       to: 'assets/ngx-e-com',
     },
   ],
+
   webpackFinal: async (config) => {
-    if (process.env['GH_PAGES']) {
-      if (config && config.module && config.module.rules) {
-        config.module.rules.push({
-          test: /.component.*.ts/,
-          loader: 'string-replace-loader',
-          options: {
-            search: '/assets/',
-            replace: '/notion-publish-tool/assets/',
-          },
-        });
-      }
-    }
+    // if (process.env['GH_PAGES']) {
+    //   config.output = {
+    //     ...config.output,
+    //     publicPath: '/ngx-e-commerce/',
+    //   };
+    //   config.module = {
+    //     ...config.module,
+    //     rules: [
+    //       ...(config.module?.rules ?? []),
+    //       {
+    //         test: /.component$/,
+    //         use: [
+    //           {
+    //             loader: 'string-replace-loader',
+    //             options: {
+    //               search: /\/assets\/ngx-e-com\//g,
+    //               replace: '/ngx-e-commerce/assets/ngx-e-com/',
+    //             },
+    //           },
+    //         ],
+    //       },
+    //     ],
+    //   };
+    // }
+    config.output = config.output || {};
+    config.output.publicPath = publicPath;
     return config;
   },
 };
