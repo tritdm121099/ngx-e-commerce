@@ -1,7 +1,8 @@
 import type { Loader, StorybookConfig } from '@storybook/angular';
 
-const repoName = process.env['GH_PAGES_REPO_NAME'] || 'ngx-e-commerce';
-const publicPath = process.env['GH_PAGES'] ? `/${repoName}/` : '/';
+const repoName = 'ngx-e-commerce';
+const isGhPages = process.env['GH_PAGES'] === 'true';
+const publicPath = isGhPages ? `/${repoName}/` : '/';
 
 const config: StorybookConfig = {
   stories: ['../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],
@@ -20,35 +21,33 @@ const config: StorybookConfig = {
       from: '../src/public',
       to: 'assets/ngx-e-com',
     },
+    {
+      from: './public',
+      to: 'assets/ngx-e-com',
+    },
   ],
 
   webpackFinal: async (config) => {
-    // if (process.env['GH_PAGES']) {
-    //   config.output = {
-    //     ...config.output,
-    //     publicPath: '/ngx-e-commerce/',
-    //   };
-    //   config.module = {
-    //     ...config.module,
-    //     rules: [
-    //       ...(config.module?.rules ?? []),
-    //       {
-    //         test: /.component$/,
-    //         use: [
-    //           {
-    //             loader: 'string-replace-loader',
-    //             options: {
-    //               search: /\/assets\/ngx-e-com\//g,
-    //               replace: '/ngx-e-commerce/assets/ngx-e-com/',
-    //             },
-    //           },
-    //         ],
-    //       },
-    //     ],
-    //   };
-    // }
-    config.output = config.output || {};
-    config.output.publicPath = publicPath;
+    config.module = {
+      ...config.module,
+      rules: [
+        ...(config.module?.rules ?? []),
+        {
+          test: /.component$/,
+          use: [
+            {
+              loader: 'string-replace-loader',
+              options: {
+                search: /\/assets\/ngx-e-com\//g,
+                replace: '/ngx-e-commerce/assets/ngx-e-com/',
+              },
+            },
+          ],
+        },
+      ],
+    };
+    // config.output = config.output || {};
+    // config.output.publicPath = publicPath;
     return config;
   },
 };
